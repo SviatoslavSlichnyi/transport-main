@@ -1,0 +1,599 @@
+{
+	"info": {
+		"_postman_id": "d071977e-4329-4a1c-b30d-ded7c9d55bcd",
+		"name": "Sviatoslav: Transport",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Transport - main",
+			"item": [
+				{
+					"name": "Arrival Time",
+					"item": [
+						{
+							"name": "Calculate time",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rest-api/arrival-transport-to-station/determine?transportId={{publicTransportId}}&stationId={{shevchenkaStationId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"arrival-transport-to-station",
+										"determine"
+									],
+									"query": [
+										{
+											"key": "transportId",
+											"value": "{{publicTransportId}}"
+										},
+										{
+											"key": "stationId",
+											"value": "{{shevchenkaStationId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Public-Transport",
+					"item": [
+						{
+							"name": "Public-Transport: Save",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"publicTransportId\", jsonData.publicTransportId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"BUS\",\r\n    \"brand\": \"Merse\",\r\n    \"numberSign\": \"BC 777 AC\",\r\n    \"transportNumber\": \"137\",\r\n    \"sitsNumber\": 54\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/rest-api/public-transport/save",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"public-transport",
+										"save"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Public-Transport: Get by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rest-api/public-transport/get/{{publicTransportId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"public-transport",
+										"get",
+										"{{publicTransportId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Public-Transport: Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"publicTransportId\": {{publicTransportId}},\r\n    \"type\": \"BUS\",\r\n    \"brand\": \"VAZ\",\r\n    \"numberSign\": \"BC 777 AC\",\r\n    \"transportNumber\": \"137\",\r\n    \"sitsNumber\": 42\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/rest-api/public-transport/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"public-transport",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Public-Transport: Get All",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rest-api/public-transport/get/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"public-transport",
+										"get",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Public-Transport: Remove",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rest-api/public-transport/remove/{{publicTransportId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"public-transport",
+										"remove",
+										"{{publicTransportId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Station",
+					"item": [
+						{
+							"name": "Station: Save \"Shevchenka\"",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"shevchenkaStationId\", jsonData.stationId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stationNumber\": \"124\",\r\n    \"streetName\": \"Shevchenka\",\r\n    \"streetNumber\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/rest-api/station/save",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"station",
+										"save"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Station: Save \"Black\"",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"blackStationId\", jsonData.stationId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stationNumber\": \"43\",\r\n    \"streetName\": \"Black\",\r\n    \"streetNumber\": 21\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/rest-api/station/save",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"station",
+										"save"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Station: Save \"Okhart\"",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"okhartStationId\", jsonData.stationId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stationNumber\": \"192\",\r\n    \"streetName\": \"Okhart\",\r\n    \"streetNumber\": 7\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/rest-api/station/save",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"station",
+										"save"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Station: Gey by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rest-api/station/get/{{shevchenkaStationId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"station",
+										"get",
+										"{{shevchenkaStationId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Station: Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stationId\": {{shevchenkaStationId}},\r\n    \"stationNumber\": \"999\",\r\n    \"streetName\": \"Shevchenka\",\r\n    \"streetNumber\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/rest-api/station/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"station",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Station: Get All",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rest-api/station/get/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"station",
+										"get",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Station: Remove",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rest-api/station/remove/{{shevchenkaStationId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"station",
+										"remove",
+										"{{shevchenkaStationId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Route",
+					"item": [
+						{
+							"name": "Route: Save",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"routeId\", jsonData.routeId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Night Express\",\r\n    \"routeNumber\": \"184a\",\r\n    \"interval\": \"01:30:00.0\",\r\n    \"schedule\": [\r\n        \"06:00:00.0\",\r\n        \"07:30:00.0\",\r\n        \"09:00:00.0\"\r\n    ],\r\n    \"startStationId\": {{shevchenkaStationId}},\r\n    \"endStationId\": {{okhartStationId}},\r\n    \"stationIds\": [\r\n        {{shevchenkaStationId}},\r\n        {{blackStationId}},\r\n        {{okhartStationId}}\r\n    ],\r\n    \"transportIds\": [\r\n        {{publicTransportId}}\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/rest-api/route/save",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"route",
+										"save"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Route: Get by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rest-api/route/get/{{routeId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"route",
+										"get",
+										"{{routeId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Route: Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"routeId\": {{routeId}},\r\n    \"name\": \"Day Fast\",\r\n    \"routeNumber\": \"47\",\r\n    \"interval\": \"01:00:00.0\",\r\n    \"schedule\": [\r\n        \"06:00:00.0\",\r\n        \"07:00:00.0\",\r\n        \"08:00:00.0\"\r\n    ],\r\n    \"startStationId\": 1,\r\n    \"endStationId\": 2,\r\n    \"stationIds\": [\r\n        {{shevchenkaStationId}},\r\n        {{blackStationId}},\r\n        {{okhartStationId}}\r\n    ],\r\n    \"transportId\": {{publicTransportId}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/rest-api/route/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"route",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Route: Get All",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rest-api/route/get/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"route",
+										"get",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Route: Remove",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rest-api/route/remove/{{routeId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest-api",
+										"route",
+										"remove",
+										"{{routeId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Transport - arrival",
+			"item": [
+				{
+					"name": "Arrival Time",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transport\": {\r\n        \"publicTransportId\": 1,\r\n        \"type\": \"BUS\",\r\n        \"brand\": \"Merse\",\r\n        \"numberSign\": \"BC 777 AC\",\r\n        \"transportNumber\": 137,\r\n        \"sitsNumber\": 54,\r\n        \"location\": null,\r\n        \"routeId\": 1\r\n    },\r\n    \"route\": {\r\n        \"routeId\": 1,\r\n        \"name\": \"Night Express\",\r\n        \"routeNumber\": \"184a\",\r\n        \"interval\": \"01:30:00\",\r\n        \"schedule\": [\r\n            \"06:00:00\",\r\n            \"07:30:00\",\r\n            \"09:00:00\"\r\n        ],\r\n        \"startStationId\": 1,\r\n        \"endStationId\": 3,\r\n        \"stationIds\": [\r\n            1,\r\n            2,\r\n            3\r\n        ],\r\n        \"transportIds\": [\r\n            1\r\n        ]\r\n    },\r\n    \"selectedStation\": {\r\n        \"stationId\": 1,\r\n        \"stationNumber\": 124,\r\n        \"streetName\": \"Shevchenka\",\r\n        \"streetNumber\": 2,\r\n        \"routeIds\": [\r\n            1\r\n        ]\r\n    },\r\n    \"expectedArrivalTime\": null,\r\n    \"distance\": null,\r\n    \"distanceMeasurementType\": \"KM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8181/rest-api/arrival/arrival-time/calculate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8181",
+							"path": [
+								"rest-api",
+								"arrival",
+								"arrival-time",
+								"calculate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
